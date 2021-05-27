@@ -1,0 +1,47 @@
+.post-dir.post-list-page{
+
+    .topbar {
+        button {
+            width : 48px;
+            height : 48px;
+        }
+        
+        .logo {
+            width: 150px; 
+        }
+
+        .btn-account {
+            width: 48px;
+            
+            svg {
+                width: 28px;
+                height : 28px;
+            }
+        }        
+    }
+
+    .post-list{ 
+        .post-card{
+            margin : 8px;
+            border-radius: 16px;
+            text-align: left;
+
+            .title-container{
+                display: flex;
+                padding: 0px;
+
+            }
+            .lbl-child-count{
+                margin-right: 16px;
+            }
+        }
+    }
+
+    .btn-write {
+        position: fixed;
+        right: 16px;
+        bottom : 16px;
+    }
+
+
+}

@@ -1,0 +1,39 @@
+@import "variables";
+
+.app-bullet {
+  display: inline-block;
+  margin: 0 2px;
+  transform: scale(0.8);
+}
+
+.app-font-sm {
+  font-size: 14px;
+}
+
+.app-grow-space {
+  flex-grow: 1;
+}
+
+
+
+// topbar 
+.MuiAppBar-colorPrimary.app-topbar {
+  background-color: white;
+  color : $textPrimaryColor; 
+
+  .app-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left : 50%;
+    transform: translateX(-50%);  
+  }
+
+  .app-left-comp {
+    margin-left: -16px;
+  }
+}
+
+
+

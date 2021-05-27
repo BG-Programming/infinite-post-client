@@ -1,0 +1,42 @@
+@import "variables";
+
+.post-dir.post-detail-page{
+    .post-content-container {
+        padding-top: $topbarHeight;
+
+        .title {
+            margin-top: $defaultMargin;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            margin : 0px -12px;
+
+            p {
+                padding-top: 4px;
+            }
+            
+        }
+    }
+
+    .link-post-section {
+        margin-top: $largeMargin;
+        padding : 0;        
+
+        .title {
+            text-align: center;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            
+            .txt-input {
+                margin-left: $smallMargin;
+                flex-grow: 1;
+                margin-right: $defaultMargin;
+            }
+        }        
+    }
+}

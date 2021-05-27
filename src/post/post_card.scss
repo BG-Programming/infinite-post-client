@@ -1,0 +1,14 @@
+.post-dir.post-card{    
+    margin : 8px;
+    border-radius: 16px;
+    text-align: left;
+
+    .title-container{
+        display: flex;
+        padding: 0px;
+
+    }
+    .lbl-child-count{
+        margin-right: 16px;
+    }    
+}

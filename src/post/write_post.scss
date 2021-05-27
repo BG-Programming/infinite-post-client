@@ -1,0 +1,18 @@
+@import "variables";
+
+.post-dir.write-post-file.write-post-page{
+    padding: $topbarHeight 0px;
+    margin : 0;
+    
+
+    .form-container {
+        margin-top: $largeMargin;
+        padding : 0px $defaultPadding;
+        width : calc(100vw - #{$defaultPadding}*2);
+
+        .desctiption {
+            margin-top: $defaultMargin;
+        }
+    }
+}
+

@@ -1,0 +1,18 @@
+@import "variables";
+
+body {
+    overflow-x: hidden;
+}
+
+pre {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    word-wrap: break-word;
+    line-break: normal;    
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+a {
+    text-decoration: none;    
+    color : $textPrimaryColor;
+}

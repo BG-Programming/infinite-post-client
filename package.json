@@ -13,6 +13,8 @@
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "@types/react-window": "^1.8.3",
+    "alertifyjs": "^1.13.1",
+    "crypto-js": "^4.0.0",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

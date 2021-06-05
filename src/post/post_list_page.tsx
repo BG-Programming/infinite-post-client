@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 // import App Types
 import {PostData} from "app-types";
 // import App Basic
-import {api} from "test-api";
+// import {api} from "test-api";
+import {api} from "api";
 import "./post_list_page.scss";
 // Import Material UI
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
@@ -25,6 +27,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 import PostCard from "./post_card";
+import {myInfo} from "my_account/MyInfo";
 
 
 
@@ -34,31 +37,36 @@ import PostCard from "./post_card";
 export default function PostListPage(props : any) {    
   const [postList, setPostList] = useState<Array<PostData> | null>(null);
   
-
   useEffect(() => {
-      (async ()=> {      
-        setPostList(  (await api.getPostList()).list  );
-      })();        
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    (async ()=> {      
+      try {
+        const responseData = await api.getPostList();
+        const postList = responseData;
+        setPostList(postList);
+      } catch(e) {
+        console.error(e);
+      }
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    if(postList === null )
-      return <></>;  
+  if(postList === null )
+    return <></>;  
 
-    return (
-      <div className="post-dir post-list-page">       
-        <Topbar/>
+  return (
+    <div className="post-dir post-list-page">       
+      <Topbar/>
 
-        <PostList postList={postList}/>
+      <PostList postList={postList}/>
 
-        <Link to="/write">
-          <Fab color="primary" aria-label="edit" className="btn-write">
-              <EditIcon />
-          </Fab>
-        </Link>
-      </div>
-    );
-  }
+      <Link to="/write">
+        <Fab color="primary" aria-label="edit" className="btn-write">
+            <EditIcon />
+        </Fab>
+      </Link>
+    </div>
+  );
+}
 
 
 
@@ -67,7 +75,7 @@ export default function PostListPage(props : any) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function Topbar() {
   //const [auth, setAuth] = React.useState(true);
-  const auth = true;
+  const auth = myInfo.isLogin();
   const [anchorEl, setAnchorEl] = React.useState(null);    
   const open = Boolean(anchorEl);
 
@@ -79,13 +87,7 @@ function Topbar() {
     setAnchorEl(null);
   };
 
-  /*
-  const handleChange = (event : any) => {
-    setAuth(event.target.checked);
-  };
-  */
-
-
+ 
   return (
     <AppBar position="static" className="topbar app-topbar">
         <Toolbar >
@@ -96,6 +98,11 @@ function Topbar() {
               <img className="logo" src={LogoImage} alt="logo"/>
             </Link>
           </Container>
+          {!auth && (
+            <Link to="/login">
+              <Button>Login</Button>
+            </Link>
+          )}
           {auth && (
             <div>
               <IconButton

@@ -7,7 +7,8 @@ import React, {useState, useEffect} from 'react';
 
 // import App Basic
 import "./post_detail_page.scss";
-import {api} from "test-api";
+// import {api} from "test-api";
+import {api} from "api";
 // import App Types
 import {PostData} from "app-types";
 
@@ -32,19 +33,36 @@ import Input from '@material-ui/core/Input';
 
 
 export default function PostDetailPage(props : any) {
+  let postId : number | null = null;
   const [post, setPost] = useState<PostData | null>(null);
 
   
   console.info("props >>>>", props);
+  
+  try {
+    postId = parseInt(props.match.params.postId);
 
+  } catch(e) {
+
+  }
+  
+  console.info("postId>>>>>>>>>", postId);
+
+  
   useEffect(() => {
       (async ()=> {      
-        setPost(  (await api.getPostDetail()).data  );
+        if( postId )
+          setPost(  await api.getPostDetail(postId)  );
       })();        
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  }, []);
 
-    if(post === null )
+
+    
+  if( postId === null )
+    return <>Post ID가 없도다</>;
+
+  if(post === null )
       return <></>;  
   
 

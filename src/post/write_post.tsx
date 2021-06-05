@@ -18,6 +18,11 @@ export default function WritePostPage(props : RouteComponentProps) {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
+
+    const query = new URLSearchParams(props.location.search);
+    const parentIdString : string | null = query.get('parentId');
+    
+
     function onTitleChange(event : React.ChangeEvent<HTMLInputElement>){
         setTitle(event.target.value);
     }
@@ -33,7 +38,8 @@ export default function WritePostPage(props : RouteComponentProps) {
         }
 
         try {
-            await api.writePost(title, description);
+            const parentId : number | null = parentIdString ? parseInt(parentIdString) : null;
+            await api.writePost(title, description, parentId);
             appAlert.success("새 글을 작성했습니다.");
             props.history.goBack();            
         } catch(err) {

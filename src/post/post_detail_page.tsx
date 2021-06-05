@@ -12,6 +12,8 @@ import {api} from "api";
 // import App Types
 import {PostData} from "app-types";
 
+import { RouteComponentProps } from "react-router-dom";
+
 
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
@@ -32,33 +34,32 @@ import Input from '@material-ui/core/Input';
 
 
 
-export default function PostDetailPage(props : any) {
+
+
+interface Props { match: {params: { postId: string; }; }; }
+export default function PostDetailPage(props : RouteComponentProps & Props) {
   let postId : number | null = null;
   const [post, setPost] = useState<PostData | null>(null);
-
   
-  console.info("props >>>>", props);
-  
+    
   try {
     postId = parseInt(props.match.params.postId);
-
   } catch(e) {
-
-  }
-  
-  console.info("postId>>>>>>>>>", postId);
-
-  
+    // show page not available
+  }  
+    
   useEffect(() => {
       (async ()=> {      
-        if( postId )
-          setPost(  await api.getPostDetail(postId)  );
+        if( postId ) {
+          
+          const postDetail = await api.getPostDetail(postId);
+          setPost(  postDetail );
+          console.info("postDetail>>>>", postDetail);
+        }
       })();        
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
-    
+  
   if( postId === null )
     return <>Post ID가 없도다</>;
 
@@ -69,22 +70,22 @@ export default function PostDetailPage(props : any) {
   return (
     <div className="post-dir post-detail-page">
 
-      <TopBar history={props.history} />
+      <TopBar {...props} />
       <PostContent post={post} />
 
-      <LinkPostSection />
-
-
+      <LinkPostSection history={props.history} postId={postId} />
 
 
       <div>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
-        <CommentCard post={post}/>
+        {post.children && 0 < post.children.length &&
+          post.children.map((post)=>{
+            return (
+              <CommentCard post={post}/>
+
+            );
+          })
+        }
+
       </div>    
     </div>
   );
@@ -92,7 +93,7 @@ export default function PostDetailPage(props : any) {
 
 
 
-function TopBar(props : any) {
+function TopBar(props : RouteComponentProps) {
   const history = props.history;
 
   function handleGoBack() {
@@ -120,7 +121,7 @@ function PostContent(props : PostContentParams) {
   
   return (
     <Container className="post-content-container">
-        <Typography variant="h4" className="title">{post.title}</Typography>
+        <Typography variant="h5" className="title">{post.title}</Typography>
 
         <pre className="description">
           {post.content}
@@ -144,8 +145,18 @@ function PostContent(props : PostContentParams) {
   ); 
 }
 
+
+
 // Title & Input
-function LinkPostSection() {
+interface LinkPostSectionProps {
+  history : RouteComponentProps["history"],
+  postId : number
+}
+function LinkPostSection(props : LinkPostSectionProps) {
+  function onWriteLinkedPostClick() {
+    props.history.push(`/write?parentId=${props.postId}`);
+  }
+
   return (
     <Container className="link-post-section">
       
@@ -155,7 +166,7 @@ function LinkPostSection() {
       
       <Container className="input-container">
         <Avatar className="user-profile"/>
-        <Input  className="txt-input" inputProps={{readOnly: true}} placeholder="Write link post..." />                
+        <Input  className="txt-input" inputProps={{readOnly: true}} placeholder="Write link post..." onClick={onWriteLinkedPostClick}/>
       </Container>
     </Container>
   );

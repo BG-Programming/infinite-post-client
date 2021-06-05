@@ -48,11 +48,10 @@ class API {
             METHOD.GET,
             "/api/posts/100/0"
         );    
-        console.log(result);
         return result;
     }
 
-    async writePost(title : string, description : string, parentId? : number) {
+    async writePost(title : string, description : string, parentId? : number | null) {
         const result = await this._request(
             METHOD.POST,
             "/api/post", 
@@ -74,7 +73,6 @@ class API {
             METHOD.GET,
             `/api/posts/${postId}`
         );    
-        console.info("result>>>>>>>>", result);
         return result;
     }
 
@@ -84,7 +82,6 @@ class API {
             `/api/login`,
             {emailOrUsername, password}
         );    
-        console.info("result>>>>>>>>", result);
         return result;
     }
 

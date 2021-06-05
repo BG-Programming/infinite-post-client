@@ -10,6 +10,7 @@ export interface PostData {
     categoryIds : Array<number>;
     isArchived :boolean;
     likeType : string;
+    children? : Array<PostData> | null;
 }
 
 export interface SimpleCallbackType { 

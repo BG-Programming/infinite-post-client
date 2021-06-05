@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //                                    Imports                                                    //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Import Material UI
@@ -26,8 +27,17 @@ import "./post_card.scss";
 //                                    Post Card                                                  //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 export default function PostCard(props : any) {    
+  const refDescriptionContainer = useRef<HTMLDivElement>(null);
   const post = props.post;
   const bull = <span className="app-bullet">•</span>;
+  const [updateCount, setUpdateCount] = useState<number>(0);
+
+  
+  useEffect(() => {    
+      if( refDescriptionContainer.current )
+        setUpdateCount(updateCount+1);    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refDescriptionContainer]);
 
   return (
     <Card className="post-dir post-card" raised={true}>
@@ -43,12 +53,20 @@ export default function PostCard(props : any) {
       
       />       
       <CardContent>
-        <Link to={`/posts/${post.id}`}>
-          <Typography variant="h5" >{post.title}</Typography>        
-          <pre className="app-font-sm">
-            {post.content}
-          </pre>      
-        </Link>  
+
+          <Link to={`/posts/${post.id}`}>
+            <Typography variant="h5" >{post.title}</Typography>
+          </Link>
+          
+          <div className="description-container" ref={refDescriptionContainer}>
+            <pre className="app-font-sm">
+              {post.content}
+            </pre>
+            {refDescriptionContainer && refDescriptionContainer.current && refDescriptionContainer.current.clientHeight === 200 &&
+              <div className="description-fade"/>
+            }
+          </div>            
+        
       </CardContent>
       <CardActions>
         <IconButton >

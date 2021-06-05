@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     (async()=>{
-      // await auth.init();
+      await auth.init();
     })();
     
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,3 +11,7 @@ export interface PostData {
     isArchived :boolean;
     likeType : string;
 }
+
+export interface SimpleCallbackType { 
+    () : void 
+};

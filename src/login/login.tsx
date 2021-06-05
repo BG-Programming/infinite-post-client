@@ -1,11 +1,9 @@
-// Code from https://github.com/animationbro/glass-morphism-login-form-css
+// UI from https://github.com/animationbro/glass-morphism-login-form-css
 import React, {useState} from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import "./login.scss";
 import {appAlert} from "lib/stdlib";
-import {api} from "api";
-import {dataStorage, SpecialPackageName} from "util/DataStorage";
 import {define} from "lib/stdlib";
 import {auth} from "auth";
 

@@ -1,5 +1,5 @@
-export * from "./app_alert";
-export default class AppError {
+export * from "./AppAlert";
+export class AppError {
     _code : number;
     _message : string;
     

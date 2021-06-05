@@ -8,6 +8,10 @@ class AppAlert {
     error(msg : string) {
         alertify.error(msg);
     }
+
+    success(msg : string) {
+        alertify.success(msg);
+    }
 }
 
 const _instance = new AppAlert();

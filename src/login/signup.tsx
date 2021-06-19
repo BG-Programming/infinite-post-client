@@ -1,8 +1,8 @@
 // UI from https://github.com/animationbro/glass-morphism-login-form-css
 import React, {useState} from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
-import { Container} from '@material-ui/core';
-import "./login.scss";
+import { RouteComponentProps } from "react-router-dom";
+import Container from '@material-ui/core/Container';
+import "./signup.scss";
 import {appAlert} from "lib/stdlib";
 import {define} from "lib/stdlib";
 import {auth} from "auth";
@@ -10,11 +10,16 @@ import {auth} from "auth";
 
 
 export default function LoginPage(props : RouteComponentProps) {
-    const [emailOrUserName, setEmailOrUserName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     
     function onEmailChange(event : React.ChangeEvent<HTMLInputElement>) {
-        setEmailOrUserName(event.target.value);
+        setEmail(event.target.value);
+    }
+
+    function onUserNameChange(event : React.ChangeEvent<HTMLInputElement>) {
+        setUserName(event.target.value);
     }
 
     function onPasswordChange(event : React.ChangeEvent<HTMLInputElement>) {
@@ -22,8 +27,10 @@ export default function LoginPage(props : RouteComponentProps) {
     }
 
     
-    async function onLoginButtonClick() {
-        if( emailOrUserName.length <= 0 ) {
+
+    
+    async function onSignupButtonClick() {
+        if( email.length <= 0 ) {
             appAlert.error("이메일이나 유저이름을 입력해 주십시오."); 
             return ;
         }
@@ -34,7 +41,7 @@ export default function LoginPage(props : RouteComponentProps) {
         }
         
         try {
-            await auth.login(emailOrUserName, password);            
+            await auth.signup(email, userName, password);            
             props.history.push(define.Route.HOME);
         }catch(e) {            
             console.info("e>>>", e);
@@ -46,12 +53,11 @@ export default function LoginPage(props : RouteComponentProps) {
         <div className="login-dir login-file">
             <Container className="login-container">
                 <form >
-                    <p>Welcome</p>
-                    <input type="email" placeholder="Email or UserName" value={emailOrUserName} onChange={onEmailChange}/><br/>
+                    <p>Sign up</p>
+                    <input type="email" placeholder="Email" value={email} onChange={onEmailChange}/><br/>
+                    <input type="text" placeholder="UserName" value={userName} onChange={onUserNameChange}/><br/>
                     <input type="password" placeholder="Password" value={password} onChange={onPasswordChange} /><br/>
-                    <input type="button" value="Login" onClick={onLoginButtonClick}/><br/>
-                    <a href="/">Forgot Password?</a>
-                    <Link to="signup"> or Signup</Link>
+                    <input type="button" value="Signup" onClick={onSignupButtonClick}/><br/>
                 </form>
                 
                 <div className="drops">

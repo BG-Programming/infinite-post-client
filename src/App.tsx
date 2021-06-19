@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './base.scss';
 import './project.scss';
 import './App.css';
@@ -16,19 +16,24 @@ import {auth} from "auth";
 import PostListPage from "./post/post_list_page";
 import PostDetailPage from "./post/post_detail_page";
 import LoginPage from "./login/login";
+import SignupPage from "./login/signup";
 import WritePostPage from "./post/write_post";
 
 
 
 function App() {
+  const [updateCount, setUpdateCount] = useState(0);
 
   useEffect(() => {
     (async()=>{
       await auth.init();
-    })();
-    
+      setUpdateCount(updateCount+1);
+    })();    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if( auth.isInit() === false )
+    return <></>
 
   return (    
     <div className="App">            
@@ -37,6 +42,7 @@ function App() {
           <Route path={`/posts/:postId`} render={(props) => <PostDetailPage {...props}/>}/>
           <Route path={`/write`} component={WritePostPage}/>
           <Route path={`/login`} component={LoginPage}/>
+          <Route path={`/signup`} component={SignupPage}/>
           <Route path="/">
             <PostListPage />
           </Route>

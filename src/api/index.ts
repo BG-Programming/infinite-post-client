@@ -28,12 +28,13 @@ class API {
         );
 
         // console.info("fetchResult>>>", fetchResult);
-        if (fetchResult.status === 200) {
+        if (fetchResult.status === 200) {                    
             return await fetchResult.json();
-        } else if (fetchResult.status === 404) {            
-            throw new AppError(1, "API NOT FOUND");            
+        } else if (fetchResult.status === 404) {                        
+            console.info("result>>>", fetchResult);
+            throw new AppError(1, "API NOT FOUND");        
         }else {
-            const jsonError = await fetchResult.json();
+            const jsonError = await fetchResult.json();            
             throw new AppError(jsonError.code, jsonError.msg);
         }       
     }
@@ -65,9 +66,6 @@ class API {
     }
 
 
-
-
-
     async getPostDetail(postId : number) {
         const result = await this._request(
             METHOD.GET,
@@ -76,7 +74,7 @@ class API {
         return result;
     }
 
-    async login(emailOrUsername : string, password : string) {
+    async login(emailOrUsername : string, password : string) {        
         const result = await this._request(
             METHOD.POST,
             `/api/login`,
@@ -85,6 +83,14 @@ class API {
         return result;
     }
 
+    async signup(email : string, userName : string, password : string) {
+        const result = await this._request(
+            METHOD.POST,
+            `/api/signup`,
+            {email, username : userName, password}
+        );    
+        return result;
+    }
 }
 
 const _instance = new API();

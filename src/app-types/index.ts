@@ -11,6 +11,7 @@ export interface PostData {
     isArchived :boolean;
     likeType : string;
     children? : Array<PostData> | null;
+    createDate : number;
 }
 
 export interface SimpleCallbackType { 

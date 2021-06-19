@@ -18,6 +18,7 @@ import CardContent from '@material-ui/core/CardContent';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import CommentIcon from '@material-ui/icons/Comment';
+import {getDisplayDate} from "util/index";
 
 import "./post_card.scss";
 
@@ -39,18 +40,18 @@ export default function PostCard(props : any) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refDescriptionContainer]);
 
+
   return (
     <Card className="post-dir post-card" raised={true}>
       <CardHeader
         avatar={ <Avatar /> }
         title={
           <Container className="title-container">
-            <Typography>{ post.userDisplayName }</Typography>            
+            <Typography>{ post.userDisplayName }</Typography>
             {bull}
-            <Typography>4d</Typography>            
-          </Container>          
+            <Typography>{getDisplayDate(post.createDate)}</Typography>
+          </Container>
         }
-      
       />       
       <CardContent>
 

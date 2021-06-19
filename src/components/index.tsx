@@ -1,0 +1,1 @@
+export const bull = <span className="app-bullet">•</span>;

@@ -11,12 +11,15 @@ import {PostData} from "app-types";
 import {api} from "api";
 import "./post_list_page.scss";
 // Import Material UI
-import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Fab from '@material-ui/core/Fab';
+import {
+  AppBar,
+  Button,
+  Container,
+  Divider,
+  IconButton,
+  Fab,
+  Toolbar
+} from '@material-ui/core';
 // Import Images
 // import LogoImage from 'assets/images/logo.png';
 import LogoImage from 'assets/images/programming.png';
@@ -34,11 +37,11 @@ import {myInfo} from "my_account/MyInfo";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //  PostListPage
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-export default function PostListPage(props : any) {    
+export default function PostListPage(props : any) {
   const [postList, setPostList] = useState<Array<PostData> | null>(null);
-  
+
   useEffect(() => {
-    (async ()=> {      
+    (async ()=> {
       try {
         const responseData = await api.getPostList();
         const postList = responseData;
@@ -51,10 +54,10 @@ export default function PostListPage(props : any) {
   }, []);
 
   if(postList === null )
-    return <></>;  
+    return <></>;
 
   return (
-    <div className="post-dir post-list-page">       
+    <div className="post-dir post-list-page">
       <Topbar/>
 
       <PostList postList={postList}/>
@@ -76,7 +79,7 @@ export default function PostListPage(props : any) {
 function Topbar() {
   //const [auth, setAuth] = React.useState(true);
   const auth = myInfo.isLogin();
-  const [anchorEl, setAnchorEl] = React.useState(null);    
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleMenu = (event : any) => {
@@ -87,7 +90,7 @@ function Topbar() {
     setAnchorEl(null);
   };
 
- 
+
   return (
     <AppBar position="static" className="topbar app-topbar">
         <Toolbar >
@@ -130,8 +133,10 @@ function Topbar() {
                 open={open}
                 onClose={handleClose}
               >
+                <MenuItem>{myInfo.getUserName()}</MenuItem>                
+                <Divider/>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>                
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </div>
           )}
@@ -144,7 +149,7 @@ function Topbar() {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//  Post List 
+//  Post List
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Post List Param interface
 interface PostListParams {
@@ -164,6 +169,3 @@ function PostList(props : PostListParams) {
     </div>
   );
 }
-
-
-

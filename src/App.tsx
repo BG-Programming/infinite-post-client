@@ -18,6 +18,7 @@ import PostDetailPage from "./post/post_detail_page";
 import LoginPage from "./login/login";
 import SignupPage from "./login/signup";
 import WritePostPage from "./post/write_post";
+import EditLinkPage from "./post/edit_link";
 
 
 
@@ -28,26 +29,27 @@ function App() {
     (async()=>{
       await auth.init();
       setUpdateCount(updateCount+1);
-    })();    
+    })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if( auth.isInit() === false )
     return <></>
 
-  return (    
-    <div className="App">            
-      <Router>       
+  return (
+    <div className="App">
+      <Router>
         <Switch>          
-          <Route path={`/posts/:postId`} render={(props) => <PostDetailPage {...props}/>}/>
           <Route path={`/write`} component={WritePostPage}/>
           <Route path={`/login`} component={LoginPage}/>
           <Route path={`/signup`} component={SignupPage}/>
+          <Route path={`/posts/:postId/edit-link`} component={EditLinkPage}/>
+          <Route path={`/posts/:postId`} render={(props) => <PostDetailPage {...props}/>}/>
           <Route path="/">
             <PostListPage />
           </Route>
         </Switch>
-      </Router>      
+      </Router>
     </div>
   );
 }

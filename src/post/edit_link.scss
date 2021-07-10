@@ -1,0 +1,51 @@
+@import "variables";
+
+.post-dir.edit-link-file.edit-link-page{
+    .tab-connected-post {
+
+        padding: $defaultMargin 0px 0px;
+
+        .no-linked-post {
+          margin-top: $largeMargin;
+        }
+
+        .link-container {
+          display: flex;
+          margin-top: 16px;
+
+          .link-post-card {
+            max-height: 72px;
+            border : 1px solid #aaa;
+            overflow: hidden;
+            border-radius: 8px;
+            padding : 8px;
+            flex-grow: 1;
+
+
+            .title {
+              font-weight: bold;
+            }
+            .description {
+              -webkit-line-clamp: 2;
+            }
+          } // .link-post-card
+        }
+
+    }
+
+
+
+    .txt-search {
+      flex-grow: 1;
+    }
+    .search-bar {
+      display: flex;
+      padding: 0px;
+      width: 100%;
+    }
+
+
+
+
+
+}

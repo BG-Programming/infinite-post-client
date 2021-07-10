@@ -16,9 +16,9 @@ class API {
         const jsonAuthrization = this._token ? {Authorization : this._token  } : undefined;
 
         const fetchResult = await fetch(
-            SERVER_HOST + url, 
-            {            
-                method, 
+            SERVER_HOST + url,
+            {
+                method,
                 body : bodyParams ? JSON.stringify(bodyParams) : null,
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,40 +28,68 @@ class API {
         );
 
         // console.info("fetchResult>>>", fetchResult);
-        if (fetchResult.status === 200) {                    
+        if (fetchResult.status === 200) {
             return await fetchResult.json();
-        } else if (fetchResult.status === 404) {                        
+        } else if (fetchResult.status === 404) {
             console.info("result>>>", fetchResult);
-            throw new AppError(1, "API NOT FOUND");        
+            throw new AppError(1, "API NOT FOUND");
         }else {
-            const jsonError = await fetchResult.json();            
+            const jsonError = await fetchResult.json();
             throw new AppError(jsonError.code, jsonError.msg);
-        }       
+        }
     }
 
     setToken(token : string) {
         this._token = token;
     }
-    
+
+
+
+    async connectPost(postId : number, targetPostId : number) {
+        const result = await this._request(
+            METHOD.POST,
+            `/api/posts/${postId}/link`,
+            {targetPostId}
+        );
+        return result;
+    }
+
+    async disconnectPost(postId : number, linkId : number) {
+        const result = await this._request(
+            METHOD.DELETE,
+            `/api/posts/${postId}/links/${linkId}`
+        );
+        return result;
+    }
+
+
+    async getPostLinkList(postId : number) {
+        const result = await this._request(
+            METHOD.GET,
+            `/api/posts/${postId}/links`
+        );
+        return result;
+    }
+
 
     async getPostList() {
         const result = await this._request(
             METHOD.GET,
             "/api/posts/100/0"
-        );    
+        );
         return result;
     }
 
     async writePost(title : string, description : string, parentId? : number | null) {
         const result = await this._request(
             METHOD.POST,
-            "/api/post", 
+            "/api/post",
             {
-                title, 
+                title,
                 content : description,
                 parentId
             }
-        );        
+        );
         return result;
     }
 
@@ -70,16 +98,16 @@ class API {
         const result = await this._request(
             METHOD.GET,
             `/api/posts/${postId}`
-        );    
+        );
         return result;
     }
 
-    async login(emailOrUsername : string, password : string) {        
+    async login(emailOrUsername : string, password : string) {
         const result = await this._request(
             METHOD.POST,
             `/api/login`,
             {emailOrUsername, password}
-        );    
+        );
         return result;
     }
 
@@ -88,7 +116,7 @@ class API {
             METHOD.POST,
             `/api/signup`,
             {email, username : userName, password}
-        );    
+        );
         return result;
     }
 }

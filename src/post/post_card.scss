@@ -1,11 +1,17 @@
-.post-dir.post-card{    
-    margin : 8px;
-    border-radius: 16px;
+@import "variables";
+
+.post-dir.post-card{
+    margin : $smallMargin;
+    border-radius: $defaultBorderRadius;
     text-align: left;
 
     .title-container{
         display: flex;
         padding: 0px;
+        align-items: center;
+        .more-option {
+          margin-right: -$smallMargin;
+        }
     }
     .description-container{
         max-height: 200px;
@@ -13,20 +19,20 @@
         position : relative;
 
         .description-fade {
-            position: absolute;        
+            position: absolute;
             width: 100%;
             height : 50px;
-            background-image: linear-gradient(to bottom, 
-                rgba(255, 255, 255, 0), 
+            background-image: linear-gradient(to bottom,
+                rgba(255, 255, 255, 0),
                 rgba(255, 255, 255, 0.9)
             100%);
             bottom: 0;
             left: 0;
         }
     }
-    
-    
+
+
     .lbl-child-count{
-        margin-right: 16px;
-    }    
+        margin-right: $defaultMargin;
+    }
 }

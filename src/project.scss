@@ -13,13 +13,34 @@
 .app-grow-space {
   flex-grow: 1;
 }
+.app-page-with-top-bar {
+  padding: $topbarHeight 0px;
+  margin : 0;
+}
+
+
+.app-one-line-ellipsis {
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  white-space: noWrap;
+  text-overflow: ellipsis;
+}
+
+.app-number-of-text-lines {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	display: -webkit-box;
+	-webkit-box-orient : vertical
+}
 
 
 
-// topbar 
+// topbar
 .MuiAppBar-colorPrimary.app-topbar {
   background-color: white;
-  color : $textPrimaryColor; 
+  color : $textPrimaryColor;
 
   .app-title {
     display: flex;
@@ -27,7 +48,7 @@
     justify-content: center;
     position: absolute;
     left : 50%;
-    transform: translateX(-50%);  
+    transform: translateX(-50%);
   }
 
   .app-left-comp {
@@ -37,7 +58,7 @@
 
 
 ////////////////////////////////////////////////////
-// Alertfy 
+// Alertfy
 .alertify-notifier .ajs-message  {
   color : white;
   border : 1px solid white;

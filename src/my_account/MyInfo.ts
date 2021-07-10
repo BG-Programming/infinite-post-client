@@ -21,6 +21,14 @@ class MyInfo {
         return this._isLogin;
     }
 
+    getUserName() : string {
+      return this._userName;
+    }
+
+    getId() : number  {
+      return this._id;
+    }
+
 }
 
 const _myInfo = new MyInfo();

@@ -1,4 +1,3 @@
-
 export interface PostData {
     id : number;
     userAccountId : number;
@@ -14,6 +13,14 @@ export interface PostData {
     createDate : number;
 }
 
-export interface SimpleCallbackType { 
-    () : void 
+export interface LinkPostData {
+    linkId : number;
+    linkCreateDate : number;
+    targetPostContent : string;
+    targetPostId : number;
+    targetPostTitle : string;
+}
+
+export interface SimpleCallbackType {
+    () : void
 };

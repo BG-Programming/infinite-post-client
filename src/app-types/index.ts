@@ -11,6 +11,7 @@ export interface PostData {
     likeType : string;
     children? : Array<PostData> | null;
     createDate : number;
+    parentInfo : PostData | null;
 }
 
 export interface LinkPostData {

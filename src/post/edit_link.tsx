@@ -13,7 +13,6 @@ import {
 import "./edit_link.scss";
 import {LinkPostData} from "app-types";
 import {api} from "api";
-import {appAlert} from "lib/stdlib";
 import DefaultTopbar from "components/DefaultTopBar";
 import SwipeableViews from 'react-swipeable-views';
 import SearchIcon from '@material-ui/icons/Search';
@@ -95,6 +94,8 @@ export default function EditLinkPage(props : RouteComponentProps<RouterProps>) {
     const newPostListList = postLinkList!.filter((post)=>{
       if( post.linkId !== linkId )
         return post;
+      else
+        return undefined;
     });
     setPostLinkList(newPostListList);
   }

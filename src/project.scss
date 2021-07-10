@@ -20,11 +20,12 @@
 
 
 .app-one-line-ellipsis {
-  width: 100%;
-  display: inline-block;
   overflow: hidden;
-  white-space: noWrap;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-box-orient : vertical;
+  -webkit-line-clamp: 1;
 }
 
 .app-number-of-text-lines {

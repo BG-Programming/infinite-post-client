@@ -6,21 +6,26 @@
 
         .parent-info-container {
             margin-top: $defaultMargin;
-            height : 60px; 
+            height : 60px;
             border : 1px solid #ccc;
             border-radius: 8px;
             padding: 4px;
             display: flex;
             align-items: center;
+            overflow: hidden;
 
             .img {
                 width : 48px;
                 height: 48px;
             }
+
+
             .desc-container {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                padding : 4px;
+
 
                 .description {
                     font-size: 14px;
@@ -51,7 +56,7 @@
             p {
                 padding-top: 4px;
             }
-            
+
         }
     }
 
@@ -66,12 +71,12 @@
         .input-container {
             display: flex;
             align-items: center;
-            
+
             .txt-input {
                 margin-left: $smallMargin;
                 flex-grow: 1;
                 margin-right: $defaultMargin;
             }
-        }        
+        }
     }
 }

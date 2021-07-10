@@ -12,13 +12,13 @@ import {api} from "api";
 import "./post_list_page.scss";
 // Import Material UI
 import {
-  AppBar,
-  Button,
-  Container,
-  Divider,
-  IconButton,
-  Fab,
-  Toolbar
+    AppBar,
+    Button,
+    Container,
+    Divider,
+    IconButton,
+    Fab,
+    Toolbar
 } from '@material-ui/core';
 // Import Images
 // import LogoImage from 'assets/images/logo.png';
@@ -38,37 +38,37 @@ import {myInfo} from "my_account/MyInfo";
 //  PostListPage
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 export default function PostListPage(props : any) {
-  const [postList, setPostList] = useState<Array<PostData> | null>(null);
+    const [postList, setPostList] = useState<Array<PostData> | null>(null);
 
-  useEffect(() => {
+    useEffect(() => {
     (async ()=> {
-      try {
-        const responseData = await api.getPostList();
-        const postList = responseData;
-        setPostList(postList);
-      } catch(e) {
-        console.error(e);
-      }
+        try {
+            const responseData = await api.getPostList();
+            const postList = responseData;
+            setPostList(postList);
+        } catch(e) {
+            console.error(e);
+        }
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if(postList === null )
-    return <></>;
+    if(postList === null )
+        return <></>;
 
-  return (
+    return (
     <div className="post-dir post-list-page">
-      <Topbar/>
+        <Topbar/>
 
-      <PostList postList={postList}/>
+        <PostList postList={postList}/>
 
-      <Link to="/write">
-        <Fab color="primary" aria-label="edit" className="btn-write">
-            <EditIcon />
-        </Fab>
-      </Link>
+        <Link to="/write">
+            <Fab color="primary" aria-label="edit" className="btn-write">
+                <EditIcon />
+            </Fab>
+        </Link>
     </div>
-  );
+    );
 }
 
 
@@ -133,7 +133,7 @@ function Topbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem>{myInfo.getUserName()}</MenuItem>                
+                <MenuItem>{myInfo.getUserName()}</MenuItem>
                 <Divider/>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>

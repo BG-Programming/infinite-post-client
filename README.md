@@ -34,13 +34,13 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 # Libraries
-## Material UI
+### Material UI
 Main Framework  
 https://material-ui.com/
 
-## @material-ui/icons
+### @material-ui/icons
 Material UI Icons
 
-## react-window  
+### react-window  
 Virtual Scroll
 https://github.com/bvaughn/react-window

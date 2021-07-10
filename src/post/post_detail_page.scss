@@ -48,6 +48,42 @@
             margin-top: $defaultMargin;
         }
 
+        .linked-post-list {
+            border : 1px solid #3a53b4;
+            border-radius: 8px;
+            padding : 8px;
+            display: flex;
+            overflow-x: scroll;
+
+            .link-post-card {
+                border : 1px solid #929dc7;
+                margin-right: 8px;
+                padding : 8px;
+                height : calc(100% - 8px);
+                max-height: 80px;
+                border-radius: 4px;
+                width : 80px;
+                overflow: hidden;
+                position : relative;
+
+                .title {
+                    margin-top: 0;
+                }
+
+                .description-fade {
+                    position: absolute;
+                    width: 100%;
+                    height : 50px;
+                    background-image: linear-gradient(to bottom,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.9)
+                    100%);
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+        }
+
         .toolbar {
             display: flex;
             align-items: center;
@@ -77,6 +113,12 @@
                 flex-grow: 1;
                 margin-right: $defaultMargin;
             }
+        }
+    }
+
+    .app-topbar {
+        .logo {
+            width: 150px;
         }
     }
 }
